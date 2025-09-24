@@ -24,8 +24,8 @@ int check_draw(const Game *game);
 // 用户界面函数
 void print_board(Game *game);
 void get_player_input(int *row, int *col);
-void show_statistic(const Game *game);
-void show_instruction(Game *game);
+void statistic(const Game *game);
+void instruction(Game *game);
 
 // 游戏流程控制
 void play_game(Game *game);

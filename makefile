@@ -1,29 +1,27 @@
-CC = gcc
-CFLAGS = -Wall -Iinclude
-SRC_DIR = src
-OBJ_DIR = obj
+CC=gcc
+CFLAGS=-Wall -Iinclude -O2
+SRC_DIR=src
+BUILD_DIR=build
+TARGETS=$(BUILD_DIR)/tictactoe
+SRCS=main.c $(SRC_DIR)/game.c $(SRC_DIR)/ui.c
+OBJS=$(BUILD_DIR)/main.o $(BUILD_DIR)/game.o $(BUILD_DIR)/ui.o
 
-SRCS = $(SRC_DIR)/game_logic.c $(SRC_DIR)/ui.c main.c
-OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(filter $(SRC_DIR)/%,$(SRCS))) \
-       $(patsubst %.c,$(OBJ_DIR)/%.o,$(filter-out $(SRC_DIR)/%,$(SRCS)))
+all:$(TARGETS)
+	@echo "all done"
 
-EXEC = tictactoe
+$(TARGETS):$(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@
 
-all: $(EXEC)
-
-$(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(BUILD_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+$(BUILD_DIR)/%.o:%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
 clean:
-	rm -rf $(OBJ_DIR) $(EXEC)
+	rm -rf $(BUILD_DIR)/*
 
-.PHONY: all clean
+.PHONY:clean all
