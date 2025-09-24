@@ -23,6 +23,5 @@ $(BUILD_DIR):
 
 clean:
 	rm -rf $(BUILD_DIR)/*
-	rm -f *.o
 
 .PHONY:clean all
