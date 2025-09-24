@@ -7,6 +7,7 @@
 #include <string.h>
 
 #define BOARD_SIZE 3
+#define LINE_LEN 3
 
 typedef struct {
     char board[BOARD_SIZE][BOARD_SIZE];
